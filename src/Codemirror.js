@@ -26,7 +26,7 @@ const CodeMirror = createReactClass({
 		path: PropTypes.string,
 		value: PropTypes.string,
 		preserveScrollPosition: PropTypes.bool,
-	},
+	},	
 	getDefaultProps () {
 		return {
 			preserveScrollPosition: false,
@@ -63,7 +63,8 @@ const CodeMirror = createReactClass({
 		}
 	},
 	componentWillReceiveProps: function (nextProps) {
-		if (this.codeMirror && nextProps.value !== undefined && nextProps.value !== this.props.value && normalizeLineEndings(this.codeMirror.getValue()) !== normalizeLineEndings(nextProps.value)) {
+		if (this.codeMirror && nextProps.value !== undefined && nextProps.value != this.value && normalizeLineEndings(this.codeMirror.getValue()) !== normalizeLineEndings(nextProps.value)) {
+			this.value = nextProps.value;
 			if (this.props.preserveScrollPosition) {
 				var prevScrollPosition = this.codeMirror.getScrollInfo();
 				this.codeMirror.setValue(nextProps.value);
